@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -49,6 +50,20 @@ public class Main {
     }
 
     private static Grid makeRandomGrid() {
-
+        Grid grid = new Grid();
+        final int[] sizes = { 2, 4, 1, 3, 1, 2, 5 };
+        final Random random = new Random();
+        for (int size : sizes) {
+            Coordinate c;
+            boolean isDown;
+            do {
+                final int x = random.nextInt(Grid.getHeight());
+                final int y = random.nextInt(Grid.getWidth());
+                c = new Coordinate(x, y);
+                isDown = random.nextInt(2) == 1;
+            } while (!grid.canPlace(c, size, isDown));
+            grid.placeShip(c, size, isDown);
+        }
+        return grid;
     }
 }

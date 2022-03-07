@@ -16,13 +16,13 @@ public class Grid {
     public boolean canPlace(Coordinate c, int size, boolean isDown) {
         if (isDown) {
             for (int i = 0; i < size; i++) {
-                if (c.getRow() + i >= HEIGHT && c.getColumn() >= WIDTH && grid[c.getRow() + i][c.getColumn()] != Piece.WATER) {
+                if (c.getRow() + i >= HEIGHT || c.getColumn() >= WIDTH || grid[c.getRow() + i][c.getColumn()] != Piece.WATER) {
                     return false;
                 }
             }
         } else {
             for (int i = 0; i < size; i++) {
-                if (c.getRow() >= HEIGHT && c.getColumn() + i >= WIDTH && grid[c.getRow()][c.getColumn() + i] != Piece.WATER) {
+                if (c.getRow() >= HEIGHT || c.getColumn() + i >= WIDTH || grid[c.getRow()][c.getColumn() + i] != Piece.WATER) {
                     return false;
                 }
             }
@@ -106,5 +106,13 @@ public class Grid {
         }
 
         return sb.toString();
+    }
+
+    public static int getHeight() {
+        return HEIGHT;
+    }
+
+    public static int getWidth() {
+        return WIDTH;
     }
 }
