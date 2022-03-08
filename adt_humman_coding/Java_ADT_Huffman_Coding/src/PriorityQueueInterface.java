@@ -1,3 +1,5 @@
+import java.util.List;
+
 public interface PriorityQueueInterface<E extends Comparable<E>> {
 
 	public void add(E newEntry) throws PriorityQueueException;
@@ -18,5 +20,4 @@ public interface PriorityQueueInterface<E extends Comparable<E>> {
 
 	public int getSize();
 	// post: returns the size of the priority queue.
-
 }

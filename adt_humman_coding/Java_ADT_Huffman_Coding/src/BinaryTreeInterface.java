@@ -13,4 +13,6 @@ public interface BinaryTreeInterface<K extends Comparable<K>> extends Comparable
 	public BinaryTreeInterface<K> getRightSubtree();
 	// return right subtree
 
+	public boolean isLeafNode();
+	// returns true if root node of this tree is leaf node
 }

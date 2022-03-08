@@ -71,5 +71,7 @@ public class BinaryTree<K extends Comparable<K>> implements BinaryTreeInterface<
 		return (root.data).compareTo(tree.getRootData());
 	}
 
-
+	public boolean isLeafNode() {
+		return getLeftSubtree() == null && getRightSubtree() == null;
+	}
 }

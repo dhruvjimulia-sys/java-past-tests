@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class TestHuffman {
 
 	public static void main(String args[]) {
@@ -12,8 +15,7 @@ public class TestHuffman {
 		// Process PriorityQueue to create a HuffmanTree
 		myHuffmanTest.printCode();
 		//Print out the codes stored in the HuffmanTree
-
 	}
-
-}// end of Test class
+}
+// end of Test class
 
