@@ -52,7 +52,25 @@ public class PriorityQueue<T extends Comparable<T>> implements
 	 * @throws PQException if the priority queue is full
 	 */
 	public void add(T newEntry) throws PQException {
-	    // TODO: Implement this method for Question 2
+		items[size] = newEntry;
+		size++;
+		percolateUp(size - 1);
+	}
+
+	private void percolateUp(int c) {
+		if (c > 0) {
+			int parent = ((c - 1) / 2);
+			if (items[c].compareTo(items[parent]) < 0) {
+				swap(c, parent);
+				percolateUp(parent);
+			}
+		}
+	}
+
+	private void swap(int firstIndex, int secondIndex) {
+		T temp = items[secondIndex];
+		items[secondIndex] = items[firstIndex];
+		items[firstIndex] = temp;
 	}
 
 	/**
@@ -71,7 +89,22 @@ public class PriorityQueue<T extends Comparable<T>> implements
 	 * <strong>Implement this method for Question 2</strong>
 	 */
 	private void PQRebuild(int root) {
-	    // TODO: Implement this method for Question 2
+		int left = 2 * root + 1;
+		int right = 2 * root + 2;
+		if (left <= size - 1) {
+			int smallerSubHeap;
+			if (left == size - 1) {
+				smallerSubHeap = left;
+			} else if (items[left].compareTo(items[right]) < 0) {
+				smallerSubHeap = left;
+			} else {
+				smallerSubHeap = right;
+			}
+			if (items[root].compareTo(items[smallerSubHeap]) > 0) {
+				swap(root, smallerSubHeap);
+				PQRebuild(smallerSubHeap);
+			}
+		}
 	}
 
 	public Iterator<Object> iterator() {
@@ -108,5 +141,16 @@ public class PriorityQueue<T extends Comparable<T>> implements
 		System.arraycopy(this.items, 0, clone.items, 0, size);
 		return clone;
 	}
-	
+
+	public static void main(String[] args) {
+		PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+		priorityQueue.add(2);
+		priorityQueue.add(3);
+		priorityQueue.add(1);
+		priorityQueue.add(10);
+		while (priorityQueue.size > 0) {
+			System.out.println(priorityQueue.peek());
+			priorityQueue.remove();
+		}
+	}
 }

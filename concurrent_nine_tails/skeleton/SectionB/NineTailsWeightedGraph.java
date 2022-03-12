@@ -24,7 +24,9 @@ public class NineTailsWeightedGraph {
 	 * <strong>Implement this method for Question 3</strong>
 	 */
 	private void constructGraph() {
-	    // TODO: Implement this method for Question 3
+		for (int i = 0; i < NUM_CONFIGURATIONS; i++) {
+			configurations.add(i, generateParents(i));
+		}
 	}
 
 	/**
@@ -103,7 +105,6 @@ public class NineTailsWeightedGraph {
 		return new FlipResult(configurationToIndex(conf), count);
 	}
 
-
 	private boolean flipACell(char[] conf, int row, int col) {
 		if (row >= 0 && row <= 2 && col >= 0 && col <= 2) {
 			conf[row * 3 + col] = conf[row * 3 + col] == 'H' ? 'T' : 'H';
@@ -155,7 +156,6 @@ public class NineTailsWeightedGraph {
 		index++; // make it back to 1-based index
 		return index;
 	}
-
 	
 	public void printParentsTest(int index) {
 		printConfiguration(index);
@@ -225,7 +225,22 @@ public class NineTailsWeightedGraph {
 		
 		ListInterface<PriorityQueueInterface<WeightedEdge>> confCopy = getConfigurationsCopy();
 
-		// TODO: Implement the rest of this method for Question 4
+		while (visited.size() < NUM_CONFIGURATIONS) {
+			int c = Integer.MAX_VALUE;
+			int u = -1;
+			int v = -1;
+			for (int i = 1; i < NUM_CONFIGURATIONS + 1; i++) {
+				final WeightedEdge minWeightedEdge = confCopy.get(i).peek();
+				if (!visited.contains(minWeightedEdge.parent) && minWeightedEdge.weight < c) {
+						c = minWeightedEdge.weight;
+						u = minWeightedEdge.parent;
+						v = i;
+				}
+			}
+			visited.add(visited.size(), v);
+			costs[v] = c;
+			nextMoves[v] = u;
+		}
 	}
 
 	// *** helper classes
