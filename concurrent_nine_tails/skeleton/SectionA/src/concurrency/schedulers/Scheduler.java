@@ -16,4 +16,9 @@ public interface Scheduler {
 	 */
 	public int chooseThread(ConcurrentProgram program) throws DeadlockException;
 
+	default void throwExceptionIfNoThreadsEnabled(ConcurrentProgram program) throws DeadlockException {
+		if (program.getEnabledThreadIds().size() == 0) {
+			throw new DeadlockException();
+		}
+	}
 }

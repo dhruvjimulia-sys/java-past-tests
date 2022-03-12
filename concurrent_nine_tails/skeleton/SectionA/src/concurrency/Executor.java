@@ -21,10 +21,19 @@ public class Executor {
 	 * @return the final state and history of execution
 	 */
 	public String execute() {
-		List<Integer> history = new LinkedList<Integer>();
+		final List<Integer> history = new LinkedList<Integer>();
 		boolean deadlockOccurred = false;
 
-		// TODO: Add code here to complete Question 3
+		do {
+			try {
+				final int chosenThread = scheduler.chooseThread(program);
+				program.step(chosenThread);
+				history.add(chosenThread);
+			} catch (DeadlockException e) {
+				deadlockOccurred = true;
+				break;
+			}
+		} while (!program.isTerminated());
 
 		StringBuilder result = new StringBuilder();
 		result.append("Final state: " + program + "\n");
@@ -34,10 +43,11 @@ public class Executor {
 		return result.toString();
 	}
 
-	// An incorrect attempt at overriding the equals method
-	// of Object
-	public boolean equals(Executor that) {
-		return program.toString() == that.program.toString();
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof Executor)) {
+			return false;
+		}
+		return program.toString().equals(((Executor) other).program.toString());
 	}
-
 }
