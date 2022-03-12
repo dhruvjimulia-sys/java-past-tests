@@ -18,7 +18,5 @@ public class WaitStmt implements Stmt {
   }
 
   @Override
-  public void execute(Store store) {
-
-  }
+  public void execute(Store store) {}
 }

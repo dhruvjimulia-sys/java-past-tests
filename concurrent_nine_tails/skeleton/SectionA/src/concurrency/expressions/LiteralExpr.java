@@ -4,15 +4,14 @@ import concurrency.Store;
 
 public class LiteralExpr implements Expr {
 
-	private int val;
+  private int val;
 
-	public LiteralExpr(int val) {
-		this.val = val;
-	}
+  public LiteralExpr(int val) {
+    this.val = val;
+  }
 
-	@Override
-	public int eval(Store store) {
-		return val;
-	}
-
+  @Override
+  public int eval(Store store) {
+    return val;
+  }
 }
