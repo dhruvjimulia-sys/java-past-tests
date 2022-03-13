@@ -24,12 +24,11 @@ public class CompactWordsSetTest {
       // checking the consistency between validWords and validWordsShuffled. If violated, the
       // entire test suite fails
       assert validWords.length == validWordsShuffled.length;
-      assert Arrays.stream(validWords).collect(Collectors.toSet()).equals(
-          Arrays.stream(validWordsShuffled).collect(Collectors.toSet())
-      );
+      assert Arrays.stream(validWords)
+          .collect(Collectors.toSet())
+          .equals(Arrays.stream(validWordsShuffled).collect(Collectors.toSet()));
     }
   }
-
 
   @Test
   public void checkIfWordIsValidValidWords() {
@@ -90,49 +89,58 @@ public class CompactWordsSetTest {
   public void addedWordsAreContainedInTheSet() throws InvalidWordException {
     CompactWordsSet wordsSet = new SimpleCompactWordTree();
 
-    Arrays.stream(validWords).forEach(w -> {
-      try {
-        boolean theCollectionChanged = wordsSet.add(w);
-        Assert.assertTrue("Add should return true when adding the new word: " + w,
-            theCollectionChanged);
-      } catch (InvalidWordException e) {
-        fail("Add thrown an exception for a valid word: " + w);
-      }
-    });
+    Arrays.stream(validWords)
+        .forEach(
+            w -> {
+              try {
+                boolean theCollectionChanged = wordsSet.add(w);
+                Assert.assertTrue(
+                    "Add should return true when adding the new word: " + w, theCollectionChanged);
+              } catch (InvalidWordException e) {
+                fail("Add thrown an exception for a valid word: " + w);
+              }
+            });
 
-    Arrays.stream(validWordsShuffled).forEach(w -> {
-      try {
-        boolean wIsInTheSet = wordsSet.contains(w);
-        Assert.assertTrue("Word " + w + " should be in the set", wIsInTheSet);
-      } catch (InvalidWordException e) {
-        fail("Contains thrown an exception for the valid word: " + w);
-      }
-    });
+    Arrays.stream(validWordsShuffled)
+        .forEach(
+            w -> {
+              try {
+                boolean wIsInTheSet = wordsSet.contains(w);
+                Assert.assertTrue("Word " + w + " should be in the set", wIsInTheSet);
+              } catch (InvalidWordException e) {
+                fail("Contains thrown an exception for the valid word: " + w);
+              }
+            });
   }
 
   @Test
   public void addDoesNotAllowDuplicates() throws InvalidWordException {
     CompactWordsSet wordsSet = new SimpleCompactWordTree();
 
-    Arrays.stream(validWords).forEach(w -> {
-      try {
-        boolean theCollectionChanged = wordsSet.add(w);
-        Assert.assertTrue("Add should return true when adding the new word: " + w,
-            theCollectionChanged);
-      } catch (InvalidWordException e) {
-        fail("Add thrown an exception for a valid word: " + w);
-      }
-    });
+    Arrays.stream(validWords)
+        .forEach(
+            w -> {
+              try {
+                boolean theCollectionChanged = wordsSet.add(w);
+                Assert.assertTrue(
+                    "Add should return true when adding the new word: " + w, theCollectionChanged);
+              } catch (InvalidWordException e) {
+                fail("Add thrown an exception for a valid word: " + w);
+              }
+            });
 
-    Arrays.stream(validWords).forEach(w -> {
-      try {
-        boolean theCollectionChanged = wordsSet.add(w);
-        Assert.assertFalse("Add should return false when adding for the second time the word: " + w,
-            theCollectionChanged);
-      } catch (InvalidWordException e) {
-        fail("Add thrown an exception for the valid word: " + w);
-      }
-    });
+    Arrays.stream(validWords)
+        .forEach(
+            w -> {
+              try {
+                boolean theCollectionChanged = wordsSet.add(w);
+                Assert.assertFalse(
+                    "Add should return false when adding for the second time the word: " + w,
+                    theCollectionChanged);
+              } catch (InvalidWordException e) {
+                fail("Add thrown an exception for the valid word: " + w);
+              }
+            });
   }
 
   @Test(expected = InvalidWordException.class)
@@ -145,50 +153,59 @@ public class CompactWordsSetTest {
   public void removedWordsAreNotContainedInTheSet() throws InvalidWordException {
     CompactWordsSet wordsSet = new SimpleCompactWordTree();
 
-    Arrays.stream(validWords).forEach(w -> {
-      try {
-        wordsSet.add(w);
-      } catch (InvalidWordException e) {
-        fail("Add thrown an exception for a valid word: " + w);
-      }
-    });
+    Arrays.stream(validWords)
+        .forEach(
+            w -> {
+              try {
+                wordsSet.add(w);
+              } catch (InvalidWordException e) {
+                fail("Add thrown an exception for a valid word: " + w);
+              }
+            });
 
-    Arrays.stream(validWordsShuffled).forEach(w -> {
-      try {
-        boolean theCollectionChanged = wordsSet.remove(w);
-        Assert.assertTrue("Remove should return true when removing the word: " + w,
-            theCollectionChanged);
-      } catch (InvalidWordException e) {
-        fail("Add thrown an exception for the valid word: " + w);
-      }
-    });
+    Arrays.stream(validWordsShuffled)
+        .forEach(
+            w -> {
+              try {
+                boolean theCollectionChanged = wordsSet.remove(w);
+                Assert.assertTrue(
+                    "Remove should return true when removing the word: " + w, theCollectionChanged);
+              } catch (InvalidWordException e) {
+                fail("Add thrown an exception for the valid word: " + w);
+              }
+            });
   }
 
   @Test
   public void removingWordsNotInTheSetDoesNotChangeTheCollection() throws InvalidWordException {
     CompactWordsSet wordsSet = new SimpleCompactWordTree();
 
-    Arrays.stream(validWordsShuffled).forEach(w -> {
-      try {
-        boolean theCollectionChanged = wordsSet.remove(w);
-        Assert.assertFalse("Remove should return false when removing the word: " + w,
-            theCollectionChanged);
-      } catch (InvalidWordException e) {
-        fail("Add thrown an exception for the valid word: " + w);
-      }
-    });
+    Arrays.stream(validWordsShuffled)
+        .forEach(
+            w -> {
+              try {
+                boolean theCollectionChanged = wordsSet.remove(w);
+                Assert.assertFalse(
+                    "Remove should return false when removing the word: " + w,
+                    theCollectionChanged);
+              } catch (InvalidWordException e) {
+                fail("Add thrown an exception for the valid word: " + w);
+              }
+            });
 
-    Arrays.stream(validWords).forEach(w -> {
-      try {
-        wordsSet.add(w);
-      } catch (InvalidWordException e) {
-        fail("Add thrown an exception for a valid word: " + w);
-      }
-    });
+    Arrays.stream(validWords)
+        .forEach(
+            w -> {
+              try {
+                wordsSet.add(w);
+              } catch (InvalidWordException e) {
+                fail("Add thrown an exception for a valid word: " + w);
+              }
+            });
 
     boolean theCollectionChanged = wordsSet.remove("zzz");
-    Assert.assertFalse("Remove should return false when removing the word: zzz",
-        theCollectionChanged);
+    Assert.assertFalse(
+        "Remove should return false when removing the word: zzz", theCollectionChanged);
   }
 
   @Test
@@ -202,41 +219,51 @@ public class CompactWordsSetTest {
     CompactWordsSet wordsSet = new SimpleCompactWordTree();
     assertEquals("A newly created set should have size 0", 0, wordsSet.size());
 
-    Arrays.stream(validWords).forEach(w -> {
-      try {
-        int previousSize = wordsSet.size();
-        wordsSet.add(w);
-        assertEquals("Wrong size after adding word: " + w, previousSize + 1, wordsSet.size());
-      } catch (InvalidWordException e) {
-        fail("Add thrown an exception for a valid word: " + w);
-      }
-    });
+    Arrays.stream(validWords)
+        .forEach(
+            w -> {
+              try {
+                int previousSize = wordsSet.size();
+                wordsSet.add(w);
+                assertEquals(
+                    "Wrong size after adding word: " + w, previousSize + 1, wordsSet.size());
+              } catch (InvalidWordException e) {
+                fail("Add thrown an exception for a valid word: " + w);
+              }
+            });
 
-    Arrays.stream(validWordsShuffled).forEach(w -> {
-      try {
-        int previousSize = wordsSet.size();
-        wordsSet.remove(w);
-        assertEquals("Wrong size after removing word: " + w, previousSize - 1, wordsSet.size());
-      } catch (InvalidWordException e) {
-        fail("Add thrown an exception for a valid word: " + w);
-      }
-    });
+    Arrays.stream(validWordsShuffled)
+        .forEach(
+            w -> {
+              try {
+                int previousSize = wordsSet.size();
+                wordsSet.remove(w);
+                assertEquals(
+                    "Wrong size after removing word: " + w, previousSize - 1, wordsSet.size());
+              } catch (InvalidWordException e) {
+                fail("Add thrown an exception for a valid word: " + w);
+              }
+            });
   }
 
   @Test
   public void uniqueWordsInAlphabeticOrder() {
     CompactWordsSet wordsSet = new SimpleCompactWordTree();
 
-    Arrays.stream(validWordsShuffled).forEach(w -> {
-      try {
-        wordsSet.add(w);
-        wordsSet.add(w); //second add should have no effect
-      } catch (InvalidWordException e) {
-        fail("Add thrown an exception for a valid word: " + w);
-      }
-    });
+    Arrays.stream(validWordsShuffled)
+        .forEach(
+            w -> {
+              try {
+                wordsSet.add(w);
+                wordsSet.add(w); // second add should have no effect
+              } catch (InvalidWordException e) {
+                fail("Add thrown an exception for a valid word: " + w);
+              }
+            });
 
-    assertEquals("Inconsistent size after adding all the test words.", validWordsShuffled.length,
+    assertEquals(
+        "Inconsistent size after adding all the test words.",
+        validWordsShuffled.length,
         wordsSet.size());
 
     List<String> uniqueWords = wordsSet.uniqueWordsInAlphabeticOrder();
@@ -255,8 +282,10 @@ public class CompactWordsSetTest {
     } catch (InvalidWordException e) {
       fail("Remove thrown an exception for a valid word: " + validWordsShuffled[0]);
     }
-    assertEquals("Inconsistent size after removing word: " + validWordsShuffled[0],
-        validWordsShuffled.length - 1, wordsSet.size());
+    assertEquals(
+        "Inconsistent size after removing word: " + validWordsShuffled[0],
+        validWordsShuffled.length - 1,
+        wordsSet.size());
 
     uniqueWords = wordsSet.uniqueWordsInAlphabeticOrder();
     uniqueWordsAsSet = new HashSet<String>(uniqueWords);
@@ -264,7 +293,9 @@ public class CompactWordsSetTest {
     assertEquals("All the words are unique.", uniqueWords.size(), uniqueWordsAsSet.size());
 
     validWordsAsSet.remove(validWordsShuffled[0]);
-    assertEquals("All the added words are in the list and the removed one is not.",
-        uniqueWordsAsSet, validWordsAsSet);
+    assertEquals(
+        "All the added words are in the list and the removed one is not.",
+        uniqueWordsAsSet,
+        validWordsAsSet);
   }
 }

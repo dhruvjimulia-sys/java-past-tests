@@ -11,16 +11,12 @@ public class PairWithOperators extends Pair implements RingElement<PairWithOpera
   @Override
   public PairWithOperators sum(PairWithOperators other) {
     return new PairWithOperators(
-        this.getCoordX() + other.getCoordX(),
-        this.getCoordY() + other.getCoordY()
-    );
+        this.getCoordX() + other.getCoordX(), this.getCoordY() + other.getCoordY());
   }
 
   @Override
   public PairWithOperators product(PairWithOperators other) {
     return new PairWithOperators(
-        this.getCoordX() * other.getCoordX(),
-        this.getCoordY() * other.getCoordY()
-    );
+        this.getCoordX() * other.getCoordX(), this.getCoordY() * other.getCoordY());
   }
 }

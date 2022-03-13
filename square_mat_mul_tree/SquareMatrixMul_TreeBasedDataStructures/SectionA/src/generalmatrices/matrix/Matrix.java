@@ -53,27 +53,20 @@ public class Matrix<T> {
     final List<T> matrixList = new ArrayList<>();
     for (int row = 0; row < order; row++) {
       for (int col = 0; col < order; col++) {
-        matrixList.add(elementSum.apply(
-            this.get(row, col),
-            other.get(row, col))
-        );
+        matrixList.add(elementSum.apply(this.get(row, col), other.get(row, col)));
       }
     }
     return new Matrix<>(matrixList);
   }
 
   public Matrix<T> product(
-      Matrix<T> other,
-      BinaryOperator<T> elementSum,
-      BinaryOperator<T> elementProduct
-  ) {
+      Matrix<T> other, BinaryOperator<T> elementSum, BinaryOperator<T> elementProduct) {
     final List<T> matrixList = new ArrayList<>();
     for (int row = 0; row < order; row++) {
       for (int col = 0; col < order; col++) {
         List<T> products = new ArrayList<>();
         for (int r = 0; r < order; r++) {
-          products.add(
-              elementProduct.apply(this.get(row, r), other.get(r, col)));
+          products.add(elementProduct.apply(this.get(row, r), other.get(r, col)));
         }
         matrixList.add(products.stream().reduce(elementSum).orElse(null));
       }

@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class Node implements Comparable<Node> {
+public class LockableNode implements Comparable<LockableNode> {
   private final char val;
-  private final List<Node> children;
-  private boolean isWord;
+  private final List<LockableNode> children;
+  private volatile boolean isWord;
 
-  public Node(char val) {
+  public LockableNode(char val) {
     this.val = val;
     children = new ArrayList<>();
     isWord = false;
   }
 
-  public Node getChild(char childVal) {
-    for (Node childNode : children) {
+  public LockableNode getChild(char childVal) {
+    for (LockableNode childNode : children) {
       if (childNode.getElem() == childVal) {
         return childNode;
       }
@@ -24,14 +24,21 @@ public class Node implements Comparable<Node> {
     return null;
   }
 
-  public Node addChild(Node child) {
-    children.add(child);
-    return child;
+  public LockableNode getChildSynchronized(char childVal) {
+    synchronized (children) {
+      return getChild(childVal);
+    }
   }
 
-  // Pre: child must be present
-  public void removeChild(Node child) {
-    getChild(child.val).isWord = false;
+  public LockableNode addChildIfNotPresent(char childVal) {
+    synchronized (children) {
+      LockableNode child = getChild(childVal);
+      if (child == null) {
+        child = new LockableNode(childVal);
+        children.add(child);
+      }
+      return child;
+    }
   }
 
   public void setIsWord(boolean isWord) {
@@ -46,12 +53,12 @@ public class Node implements Comparable<Node> {
     return val;
   }
 
-  public List<Node> getSortedChildren() {
-    return children.stream().sorted(Comparator.comparingInt(Node::getElem)).toList();
+  public List<LockableNode> getSortedChildren() {
+    return children.stream().sorted(Comparator.comparingInt(LockableNode::getElem)).toList();
   }
 
   public List<String> uniqueWordsInAlphabeticOrder(String currentWord, List<String> allStrings) {
-    for (Node child : getSortedChildren()) {
+    for (LockableNode child : getSortedChildren()) {
       final String currentString = currentWord + child.getElem();
       if (child.getIsWord()) {
         allStrings.add(currentString);
@@ -62,7 +69,7 @@ public class Node implements Comparable<Node> {
   }
 
   @Override
-  public int compareTo(Node o) {
+  public int compareTo(LockableNode o) {
     return 0;
   }
 }

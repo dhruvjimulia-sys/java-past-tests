@@ -7,10 +7,10 @@ import java.util.List;
 public class Example {
 
   public static Matrix<PairWithOperators> multiplyPairMatrices(
-        List<Matrix<PairWithOperators>> matrices) {
+      List<Matrix<PairWithOperators>> matrices) {
     assert matrices.size() > 0;
-    return matrices.stream().reduce((a, b) -> a.product(b, PairWithOperators::sum,
-        PairWithOperators::product)).get();
+    return matrices.stream()
+        .reduce((a, b) -> a.product(b, PairWithOperators::sum, PairWithOperators::product))
+        .get();
   }
-
 }

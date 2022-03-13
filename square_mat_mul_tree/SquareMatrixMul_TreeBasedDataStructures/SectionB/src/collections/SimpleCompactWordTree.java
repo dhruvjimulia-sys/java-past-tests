@@ -3,18 +3,16 @@ package collections;
 import collections.exceptions.InvalidWordException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.stream.Collectors;
 
 public class SimpleCompactWordTree implements CompactWordsSet {
-  private AtomicInteger size;
+  private int size;
   private Node root;
   private final Lock lock;
 
   public SimpleCompactWordTree() {
-    size = new AtomicInteger(0);
+    size = 0;
     root = new Node('\0');
     lock = new ReentrantLock();
   }
@@ -25,7 +23,6 @@ public class SimpleCompactWordTree implements CompactWordsSet {
     try {
       CompactWordsSet.checkIfWordIsValid(word);
       Node curr = root;
-      Node parent = null;
 
       String remainingWord = word;
       while (remainingWord.length() > 0) {
@@ -33,7 +30,6 @@ public class SimpleCompactWordTree implements CompactWordsSet {
         if (child == null) {
           child = curr.addChild(new Node(remainingWord.charAt(0)));
         }
-        parent = curr;
         curr = child;
         remainingWord = remainingWord.substring(1);
       }
@@ -41,7 +37,7 @@ public class SimpleCompactWordTree implements CompactWordsSet {
         return false;
       } else {
         curr.setIsWord(true);
-        size.incrementAndGet();
+        size++;
         return true;
       }
     } finally {
@@ -67,7 +63,7 @@ public class SimpleCompactWordTree implements CompactWordsSet {
       }
       if (curr.getIsWord()) {
         curr.setIsWord(false);
-        size.decrementAndGet();
+        size--;
         return true;
       } else {
         return false;
@@ -100,7 +96,7 @@ public class SimpleCompactWordTree implements CompactWordsSet {
 
   @Override
   public int size() {
-    return size.get();
+    return size;
   }
 
   @Override
