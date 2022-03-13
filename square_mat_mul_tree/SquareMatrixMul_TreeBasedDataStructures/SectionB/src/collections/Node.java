@@ -29,11 +29,6 @@ public class Node implements Comparable<Node> {
     return child;
   }
 
-  // Pre: child must be present
-  public void removeChild(Node child) {
-    getChild(child.val).isWord = false;
-  }
-
   public void setIsWord(boolean isWord) {
     this.isWord = isWord;
   }

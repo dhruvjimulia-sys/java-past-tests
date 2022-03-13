@@ -81,13 +81,13 @@ public class CompactWordsSetTest {
 
   @Test(expected = InvalidWordException.class)
   public void addingInvalidWordsThrowsExceptions() throws InvalidWordException {
-    CompactWordsSet wordsSet = new SimpleCompactWordTree();
+    CompactWordsSet wordsSet = new SimpleCompactWordTreeRecursion();
     wordsSet.add("abC");
   }
 
   @Test
   public void addedWordsAreContainedInTheSet() throws InvalidWordException {
-    CompactWordsSet wordsSet = new SimpleCompactWordTree();
+    CompactWordsSet wordsSet = new SimpleCompactWordTreeRecursion();
 
     Arrays.stream(validWords)
         .forEach(
@@ -115,7 +115,7 @@ public class CompactWordsSetTest {
 
   @Test
   public void addDoesNotAllowDuplicates() throws InvalidWordException {
-    CompactWordsSet wordsSet = new SimpleCompactWordTree();
+    CompactWordsSet wordsSet = new SimpleCompactWordTreeRecursion();
 
     Arrays.stream(validWords)
         .forEach(
@@ -145,13 +145,13 @@ public class CompactWordsSetTest {
 
   @Test(expected = InvalidWordException.class)
   public void removingInvalidWordsThrowsExceptions() throws InvalidWordException {
-    CompactWordsSet wordsSet = new SimpleCompactWordTree();
+    CompactWordsSet wordsSet = new SimpleCompactWordTreeRecursion();
     wordsSet.add("");
   }
 
   @Test
   public void removedWordsAreNotContainedInTheSet() throws InvalidWordException {
-    CompactWordsSet wordsSet = new SimpleCompactWordTree();
+    CompactWordsSet wordsSet = new SimpleCompactWordTreeRecursion();
 
     Arrays.stream(validWords)
         .forEach(
@@ -178,7 +178,7 @@ public class CompactWordsSetTest {
 
   @Test
   public void removingWordsNotInTheSetDoesNotChangeTheCollection() throws InvalidWordException {
-    CompactWordsSet wordsSet = new SimpleCompactWordTree();
+    CompactWordsSet wordsSet = new SimpleCompactWordTreeRecursion();
 
     Arrays.stream(validWordsShuffled)
         .forEach(
@@ -210,13 +210,13 @@ public class CompactWordsSetTest {
 
   @Test
   public void aNewlyCreatedSetHasSize0() {
-    CompactWordsSet wordsSet = new SimpleCompactWordTree();
+    CompactWordsSet wordsSet = new SimpleCompactWordTreeRecursion();
     assertEquals("A newly created set should have size 0", 0, wordsSet.size());
   }
 
   @Test
   public void addAndRemoveChangeSizeConsistently() {
-    CompactWordsSet wordsSet = new SimpleCompactWordTree();
+    CompactWordsSet wordsSet = new SimpleCompactWordTreeRecursion();
     assertEquals("A newly created set should have size 0", 0, wordsSet.size());
 
     Arrays.stream(validWords)
@@ -248,7 +248,7 @@ public class CompactWordsSetTest {
 
   @Test
   public void uniqueWordsInAlphabeticOrder() {
-    CompactWordsSet wordsSet = new SimpleCompactWordTree();
+    CompactWordsSet wordsSet = new SimpleCompactWordTreeRecursion();
 
     Arrays.stream(validWordsShuffled)
         .forEach(
