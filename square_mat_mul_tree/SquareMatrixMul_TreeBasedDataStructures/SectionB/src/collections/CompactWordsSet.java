@@ -6,7 +6,7 @@ import java.util.List;
 public interface CompactWordsSet {
 
   static void checkIfWordIsValid(String word) throws InvalidWordException {
-    // TO BE IMPLEMENTED
+    // if (word == null || word.equals("") || )
   }
 
   boolean add(String word) throws InvalidWordException;

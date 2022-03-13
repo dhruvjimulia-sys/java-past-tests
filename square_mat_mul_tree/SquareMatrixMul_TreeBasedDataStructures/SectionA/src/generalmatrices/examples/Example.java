@@ -8,8 +8,9 @@ public class Example {
 
   public static Matrix<PairWithOperators> multiplyPairMatrices(
         List<Matrix<PairWithOperators>> matrices) {
-    // TODO: implement as part of Question 4
-    return null;
+    assert matrices.size() > 0;
+    return matrices.stream().reduce((a, b) -> a.product(b, PairWithOperators::sum,
+        PairWithOperators::product)).get();
   }
 
 }
