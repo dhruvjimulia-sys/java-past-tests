@@ -1,9 +1,8 @@
 package noughtsandcrosses;
 
-public class ListIndexOutOfBoundsException extends IndexOutOfBoundsException{
+public class ListIndexOutOfBoundsException extends IndexOutOfBoundsException {
 
-	public ListIndexOutOfBoundsException(String s){
-		super(s);
-	}
-	
+  public ListIndexOutOfBoundsException(String s) {
+    super(s);
+  }
 }
