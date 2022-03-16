@@ -19,7 +19,17 @@ public abstract class Entity {
     return propagateDamage(spellCaster.getStrength());
   }
 
-  protected abstract int propagateDamage(int damageAmount);
+  protected int propagateDamage(int damageAmount) {
+    assert damageAmount >= 0;
+    final int effectiveDamageAmount = Math.min(damageAmount, lifePoints);
+    lifePoints -= effectiveDamageAmount;
+    return effectiveDamageAmount;
+  }
 
   public abstract int minimumStrikeToDestroy();
+
+  @Override
+  public String toString() {
+    return name + "(" + lifePoints + ")";
+  }
 }

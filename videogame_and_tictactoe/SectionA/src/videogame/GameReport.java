@@ -27,7 +27,8 @@ public class GameReport {
 
     System.out.println(t1);
 
-    final Magician m7 = new Magician("Ron", t1.minimumStrikeToDestroy() / 2);
+    final Magician m7 =
+        new Magician("Ron", t1.minimumStrikeToDestroy() / Magician.STRENGTH_MULTIPLE);
     t1.applySpell(m7);
 
     System.out.println(t1);

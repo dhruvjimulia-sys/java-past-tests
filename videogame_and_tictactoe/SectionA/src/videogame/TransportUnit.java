@@ -4,7 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TransportUnit extends Entity {
-  Set<Entity> entities;
+  private final Set<Entity> entities;
+  public static final int DAMAGE_DECAY = 2;
 
   public TransportUnit(String name, int lifePoints) {
     super(name, lifePoints);
@@ -13,11 +14,10 @@ public class TransportUnit extends Entity {
 
   @Override
   protected int propagateDamage(int damageAmount) {
-    assert damageAmount >= 0;
-    final int effectiveDamageAmount = Math.min(damageAmount, lifePoints);
-    lifePoints -= effectiveDamageAmount;
-    return effectiveDamageAmount
-        + entities.stream().map(e -> e.propagateDamage(damageAmount / 2)).reduce(0, Integer::sum);
+    return super.propagateDamage(damageAmount)
+        + entities.stream()
+            .map(e -> e.propagateDamage(damageAmount / DAMAGE_DECAY))
+            .reduce(0, Integer::sum);
   }
 
   @Override
@@ -26,7 +26,7 @@ public class TransportUnit extends Entity {
         lifePoints,
         entities.stream()
             .map(Entity::minimumStrikeToDestroy)
-            .map(i -> i * 2)
+            .map(i -> i * DAMAGE_DECAY)
             .reduce(Integer.MIN_VALUE, Math::max));
   }
 
@@ -36,11 +36,8 @@ public class TransportUnit extends Entity {
 
   @Override
   public String toString() {
-    return name
-        + "("
-        + lifePoints
-        + ") "
-        + "transporting: ["
+    return super.toString()
+        + " transporting: ["
         + entities.stream().map(Object::toString).reduce((a, b) -> a + ", " + b).orElse("")
         + "]";
   }

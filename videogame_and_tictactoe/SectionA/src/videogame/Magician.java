@@ -1,6 +1,7 @@
 package videogame;
 
 public class Magician extends Entity implements SpellCaster {
+  public static final int STRENGTH_MULTIPLE = 2;
 
   public Magician(String name, int lifePoints) {
     super(name, lifePoints);
@@ -8,15 +9,12 @@ public class Magician extends Entity implements SpellCaster {
 
   @Override
   public int getStrength() {
-    return lifePoints * 2;
+    return lifePoints * STRENGTH_MULTIPLE;
   }
 
   @Override
   protected int propagateDamage(int damageAmount) {
-    assert damageAmount >= 0;
-    final int effectiveDamageAmount = Math.min(damageAmount, lifePoints);
-    lifePoints -= effectiveDamageAmount;
-    return effectiveDamageAmount;
+    return super.propagateDamage(damageAmount);
   }
 
   @Override
@@ -26,6 +24,6 @@ public class Magician extends Entity implements SpellCaster {
 
   @Override
   public String toString() {
-    return name + "(" + lifePoints + ")";
+    return super.toString();
   }
 }
