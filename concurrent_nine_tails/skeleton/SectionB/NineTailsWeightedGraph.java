@@ -19,7 +19,8 @@ public class NineTailsWeightedGraph {
 
   /** <strong>Implement this method for Question 3</strong> */
   private void constructGraph() {
-    for (int i = 0; i < NUM_CONFIGURATIONS; i++) {
+    configurations = new ListArrayBased<PriorityQueueInterface<WeightedEdge>>();
+    for (int i = 1; i <= NUM_CONFIGURATIONS; i++) {
       configurations.add(i, generateParents(i));
     }
   }
@@ -205,22 +206,24 @@ public class NineTailsWeightedGraph {
 
     ListInterface<PriorityQueueInterface<WeightedEdge>> confCopy = getConfigurationsCopy();
 
-    while (visited.size() < NUM_CONFIGURATIONS) {
+    while (visited.size() + 1 < NUM_CONFIGURATIONS) {
       int c = Integer.MAX_VALUE;
       int u = -1;
       int v = -1;
       for (int i = 1; i < NUM_CONFIGURATIONS + 1; i++) {
         final WeightedEdge minWeightedEdge = confCopy.get(i).peek();
-        if (!visited.contains(minWeightedEdge.parent) && minWeightedEdge.weight < c) {
+        if (minWeightedEdge != null && !visited.contains(minWeightedEdge.parent) && minWeightedEdge.weight < c) {
           c = minWeightedEdge.weight;
           u = minWeightedEdge.parent;
           v = i;
         }
       }
-      visited.add(visited.size(), v);
+      visited.add(visited.size() + 1, v);
       costs[v] = c;
       nextMoves[v] = u;
     }
+
+    mst = new MinimumSpanningTree(nextMoves, costs);
   }
 
   // *** helper classes
