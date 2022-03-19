@@ -15,7 +15,7 @@ public class LinkedListPriorityQueue<T> implements PriorityQueue<T> {
     } else {
       Node<T> prev = null;
       Node<T> curr = head;
-      while (curr.getPriority() > priority) {
+      while (curr != null && curr.getPriority() < priority) {
         prev = curr;
         curr = curr.getNext();
       }
@@ -56,7 +56,7 @@ public class LinkedListPriorityQueue<T> implements PriorityQueue<T> {
 
       @Override
       public Node<T> next() {
-        curr = curr.getNext();
+        curr = (curr == null) ? head : curr.getNext();
         return curr;
       }
 

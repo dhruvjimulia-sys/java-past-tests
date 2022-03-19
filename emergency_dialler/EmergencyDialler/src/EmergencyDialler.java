@@ -10,12 +10,17 @@ public abstract class EmergencyDialler {
   }
 
   public Contact emergency() {
-    Contact nextContact = null;
-    do {
-      nextContact = queue.dequeue();
-    } while (nextContact != null
-        && nextContact.getPeople().stream()
-            .allMatch(p -> dialler.call(p.getTelephoneNumber(), "Emergency at " + location)));
+    Contact nextContact = queue.dequeue();
+    while (nextContact != null) {
+      if (nextContact
+          .getPeople()
+          .stream()
+          .allMatch(p -> dialler.call(p.getTelephoneNumber(), p.getName()))) {
+        break;
+      } else {
+        nextContact = queue.dequeue();
+      }
+    }
     return nextContact;
   }
 
