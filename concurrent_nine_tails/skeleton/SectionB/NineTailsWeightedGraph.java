@@ -114,8 +114,11 @@ public class NineTailsWeightedGraph {
 
     for (int i = 0; i < 9; i++) {
       int digit = index % 2;
-      if (digit == 0) conf[8 - i] = 'H';
-      else conf[8 - i] = 'T';
+      if (digit == 0) {
+        conf[8 - i] = 'H';
+      } else {
+        conf[8 - i] = 'T';
+      }
       index = index / 2;
     }
     return conf;
@@ -129,8 +132,11 @@ public class NineTailsWeightedGraph {
   public int configurationToIndex(char[] conf) {
     int index = 0;
     for (int i = 0; i < 9; i++) {
-      if (conf[i] == 'T') index = index * 2 + 1;
-      else index = index * 2 + 0;
+      if (conf[i] == 'T') {
+        index = index * 2 + 1;
+      } else {
+        index = index * 2 + 0;
+      }
     }
     index++; // make it back to 1-based index
     return index;
@@ -197,25 +203,29 @@ public class NineTailsWeightedGraph {
     ListInterface<Integer> visited = new ListArrayBased<Integer>();
     int[] nextMoves = new int[NUM_CONFIGURATIONS + 1];
     int[] costs = new int[NUM_CONFIGURATIONS + 1];
-    // init
+
     for (int i = 1; i <= NUM_CONFIGURATIONS; i++) {
       nextMoves[i] = -1; // -1 means not visited yet (i.e., no parental
       // information)
-      costs[i] = Integer.MAX_VALUE;
+      costs[i] = 0;
     }
+
+    visited.add(visited.size() + 1, 512);
 
     ListInterface<PriorityQueueInterface<WeightedEdge>> confCopy = getConfigurationsCopy();
 
-    while (visited.size() + 1 < NUM_CONFIGURATIONS) {
+    while (visited.size() < NUM_CONFIGURATIONS) {
       int c = Integer.MAX_VALUE;
-      int u = -1;
-      int v = -1;
-      for (int i = 1; i < NUM_CONFIGURATIONS + 1; i++) {
+      int u = 0;
+      int v = 0;
+      for (int i = 1; i < NUM_CONFIGURATIONS; i++) {
         final WeightedEdge minWeightedEdge = confCopy.get(i).peek();
-        if (minWeightedEdge != null && !visited.contains(minWeightedEdge.parent) && minWeightedEdge.weight < c) {
-          c = minWeightedEdge.weight;
-          u = minWeightedEdge.parent;
-          v = i;
+        if (visited.contains(minWeightedEdge.child)
+            && !visited.contains(minWeightedEdge.parent)
+            && costs[minWeightedEdge.parent] + minWeightedEdge.weight < c) {
+          v = minWeightedEdge.parent;
+          u = minWeightedEdge.child;
+          c = costs[minWeightedEdge.child] + minWeightedEdge.weight;
         }
       }
       visited.add(visited.size() + 1, v);
@@ -263,9 +273,13 @@ public class NineTailsWeightedGraph {
     }
 
     public int compareTo(WeightedEdge edge) {
-      if (weight < edge.weight) return -1;
-      else if (weight == edge.weight) return 0;
-      else return 1;
+      if (weight < edge.weight) {
+        return -1;
+      } else if (weight == edge.weight) {
+        return 0;
+      } else {
+        return 1;
+      }
     }
 
     @Override
