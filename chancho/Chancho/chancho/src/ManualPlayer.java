@@ -19,12 +19,12 @@ public final class ManualPlayer extends AbstractPlayer {
 		System.out.println("These are your cards:");
 		System.out.println(super.toString());
 		System.out.println("Please input card number to discard: (0 to "
-				+ (HANDSIZE - 1) + ")");
+				+ (Player.HANDSIZE - 1) + ")");
 		int cardIndex = scanner.nextInt();
-		while (cardIndex < 0 || cardIndex >= HANDSIZE) {
+		while (cardIndex < 0 || cardIndex >= Player.HANDSIZE) {
 			System.out
 					.println("Invalid card index. Please enter number between 0 and "
-							+ (HANDSIZE - 1));
+							+ (Player.HANDSIZE - 1));
 			cardIndex = scanner.nextInt();
 		}
 		return cardIndex;

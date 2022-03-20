@@ -21,7 +21,7 @@ public abstract class AbstractPlayer implements Player {
 		this.discardPile = left;
 		this.pickupPile = right;
 		this.name = name;
-		cards = new Card[HANDSIZE];
+		cards = new Card[Player.HANDSIZE];
 	}
 
 	// A card selection strategy that will determine which card will be

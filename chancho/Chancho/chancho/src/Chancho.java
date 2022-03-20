@@ -40,7 +40,7 @@ public final class Chancho {
 
 	private static Set<Player> setupPlayers() {
 		// TODO: TASK 5: IMPLEMENTATION OF THIS METHOD
-
+		return null;
 	}
 
 	/**

@@ -36,13 +36,14 @@ public final class MinHeapDeck implements Deck {
 
 	public Deck cut() {
 
-		// TODO: TASK 2a: IMPLEMENTATION OF THIS METHOD 
-
+		// TODO: TASK 2a: IMPLEMENTATION OF THIS METHOD
+		return null;
 	}
 
 	public Deck riffleShuffle(Deck deck) {
 		
 		// TODO: TASK 2b: IMPLEMENTATION OF THIS METHOD
+		return null;
 	}
 
 	@Override

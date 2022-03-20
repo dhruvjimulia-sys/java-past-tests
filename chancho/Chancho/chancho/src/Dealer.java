@@ -1,3 +1,4 @@
+import java.util.Set;
 
 /**
  * The class Dealer encapsulates the actions of a Chancho game-dealer. The game
@@ -12,6 +13,12 @@
  */
 public final class Dealer {
 
-	// TODO: TASK 4: IMPLEMENTATION OF THIS CLASS
+	public Dealer(Set<Player> players, Deck deck) {
+
+  }
+
+  public void playGame() {
+
+  }
 
 }
