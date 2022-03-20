@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 /**
  * This class implements a Deck of playing cards using a min-heap to store the
  * cards. Complete implementations of the methods: size(), isEmpty(),
@@ -35,15 +37,23 @@ public final class MinHeapDeck implements Deck {
 	}
 
 	public Deck cut() {
-
-		// TODO: TASK 2a: IMPLEMENTATION OF THIS METHOD
-		return null;
+		final Deck top = new MinHeapDeck();
+		final int size = this.size();
+		for (int i = 0; i < (int) (size / 2); i++) {
+			top.addToBottom(this.removeFromTop());
+		}
+		return top;
 	}
 
 	public Deck riffleShuffle(Deck deck) {
-		
-		// TODO: TASK 2b: IMPLEMENTATION OF THIS METHOD
-		return null;
+		assert (this.size() == deck.size());
+		final int size = deck.size();
+		final Deck shuffled = new MinHeapDeck();
+		for (int i = 0; i < size; i++) {
+			shuffled.addToBottom(removeFromTop());
+			shuffled.addToBottom(deck.removeFromTop());
+		}
+		return shuffled;
 	}
 
 	@Override

@@ -12,13 +12,33 @@ import java.util.Set;
  * 
  */
 public final class Dealer {
+  private final Set<Player> players;
+  private final Deck deck;
 
 	public Dealer(Set<Player> players, Deck deck) {
-
+    this.players = players;
+    this.deck = deck;
   }
 
   public void playGame() {
+    players.forEach(p -> {
+      for (int i = 0; i < Player.HANDSIZE; i++) {
+        p.addToHand(deck.removeFromTop());
+      }
+    });
+    while (players.stream().noneMatch(Player::hasWon)) {
+      players.forEach(Player::discard);
+      players.forEach(Player::pickup);
+    }
+    congratulateWinners();
+  }
 
+  private void congratulateWinners() {
+    System.out.println("The game has been won! Congratulations to:");
+    players.stream().filter(Player::hasWon).forEach(p -> {
+      System.out.println(p.toString());
+      System.out.println();
+    });
   }
 
 }

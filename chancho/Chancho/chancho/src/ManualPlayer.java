@@ -10,7 +10,7 @@ public final class ManualPlayer extends AbstractPlayer {
 	private final Scanner scanner;
 
 	ManualPlayer(CardPile in, CardPile out, String name) {
-		super(out, in, name);
+		super(in, out, name);
 		scanner = new Scanner(System.in);
 	}
 
