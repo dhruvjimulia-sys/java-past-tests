@@ -1,10 +1,8 @@
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
- * This class implements a min-heap abstract data type (as described by the
- * generic interface IMinHeap<T extends Comparable<T>>) using a fixed array of
- * size MinHeap.MAXIMUM_HEAP_SIZE.
+ * This class implements a min-heap abstract data type (as described by the generic interface
+ * IMinHeap<T extends Comparable<T>>) using a fixed array of size MinHeap.MAXIMUM_HEAP_SIZE.
  */
 public class MinHeap<T extends Comparable<T>> implements IMinHeap<T> {
   public static final int MAXIMUM_HEAP_SIZE = 100;
@@ -97,7 +95,5 @@ public class MinHeap<T extends Comparable<T>> implements IMinHeap<T> {
     System.out.println(heap.removeMin());
     System.out.println(heap.removeMin());
     System.out.println(heap.removeMin());
-
-
   }
 }

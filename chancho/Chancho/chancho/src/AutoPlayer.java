@@ -14,13 +14,13 @@ public class AutoPlayer extends AbstractPlayer {
   @Override
   protected int selectCard() {
     Map<Rank, Integer> frequencyTable =
-        Arrays
-        .stream(cards)
-        .map(Card::getRank)
-        .distinct()
-        .collect(Collectors.toMap(Function.identity(),
-            r -> (int) Arrays.stream(cards).filter(c -> c.getRank().equals(r)).count())
-        );
+        Arrays.stream(cards)
+            .map(Card::getRank)
+            .distinct()
+            .collect(
+                Collectors.toMap(
+                    Function.identity(),
+                    r -> (int) Arrays.stream(cards).filter(c -> c.getRank().equals(r)).count()));
 
     int maxValue = Integer.MIN_VALUE;
     Rank maxValueRank = null;
