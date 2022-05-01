@@ -1,6 +1,8 @@
 package generators;
 
-public interface StringGenerator {
+public interface StringGenerator extends DataGenerator<String> {
+  @Override
   String next();
+  @Override
   boolean hasNext();
 }
