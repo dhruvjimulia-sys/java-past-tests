@@ -30,5 +30,4 @@ public class Compressor {
     System.out.println("The final length is:   " + compressedLength);
     System.out.println("Compression ratio:     " + compressionRate * 100 + " times");
   }
-
 }

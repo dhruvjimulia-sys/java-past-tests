@@ -45,8 +45,8 @@ public class HuffmanEncoder {
     return new HuffmanEncoder(root, traverse(root, "", wordbitmap));
   }
 
-  private static Map<String, String> traverse(HuffmanNode currNode,
-      String currString, Map<String, String> wordbitmap) {
+  private static Map<String, String> traverse(
+      HuffmanNode currNode, String currString, Map<String, String> wordbitmap) {
     if (currNode instanceof HuffmanLeaf) {
       wordbitmap.put(((HuffmanLeaf) currNode).word, currString);
     } else {
@@ -61,9 +61,7 @@ public class HuffmanEncoder {
     if (!text.stream().allMatch(word2bitsequence::containsKey)) {
       throw new HuffmanEncoderException("Word not in key set of map");
     }
-    return text.stream()
-        .map(word2bitsequence::get)
-        .reduce("", (a, b) -> a + b);
+    return text.stream().map(word2bitsequence::get).reduce("", (a, b) -> a + b);
   }
 
   public List<String> decompress(String compressedText) {
@@ -73,9 +71,7 @@ public class HuffmanEncoder {
       int counter = 0;
       while (curr instanceof HuffmanInternalNode) {
         if (compressedText.length() == counter - 1) {
-          throw new HuffmanEncoderException(
-              "Compression does not represent word"
-          );
+          throw new HuffmanEncoderException("Compression does not represent word");
         }
         if (compressedText.charAt(counter) == '0') {
           curr = ((HuffmanInternalNode) curr).left;

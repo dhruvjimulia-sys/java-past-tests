@@ -52,13 +52,9 @@ public class Utility {
     final Counter[] threads = new Counter[THREAD_NUM];
     final int SUBLIST_LENGTH = words.size() / THREAD_NUM;
     for (int i = 0; i < THREAD_NUM - 1; i++) {
-      threads[i] = new Counter(
-          words,
-          i * SUBLIST_LENGTH,
-          (i + 1) * SUBLIST_LENGTH);
+      threads[i] = new Counter(words, i * SUBLIST_LENGTH, (i + 1) * SUBLIST_LENGTH);
     }
-    threads[THREAD_NUM - 1] = new Counter(words,
-        (THREAD_NUM - 1) * SUBLIST_LENGTH, words.size());
+    threads[THREAD_NUM - 1] = new Counter(words, (THREAD_NUM - 1) * SUBLIST_LENGTH, words.size());
 
     for (Thread thread : threads) {
       thread.start();
