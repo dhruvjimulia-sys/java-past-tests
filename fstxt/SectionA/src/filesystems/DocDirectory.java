@@ -1,8 +1,6 @@
 package filesystems;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,9 +40,10 @@ public class DocDirectory extends DocFile {
   @Override
   public DocFile duplicate() {
     final DocDirectory directory = new DocDirectory(getName());
-    files.forEach(f -> {
-      directory.addFile(f.duplicate());
-    });
+    files.forEach(
+        f -> {
+          directory.addFile(f.duplicate());
+        });
     return directory;
   }
 

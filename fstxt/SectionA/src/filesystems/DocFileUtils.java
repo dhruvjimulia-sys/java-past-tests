@@ -13,10 +13,10 @@ public class DocFileUtils {
    *     or indirectly in this directory.
    */
   public static int getTotalDirectorySize(DocDirectory directory) {
-    return directory.getSize() +
-        directory.getAllFiles().stream().map(
-            f -> f.isDataFile() ? f.getSize() : getTotalDirectorySize(f.asDirectory())
-        ).reduce(0, Integer::sum) ;
+    return directory.getSize()
+        + directory.getAllFiles().stream()
+            .map(f -> f.isDataFile() ? f.getSize() : getTotalDirectorySize(f.asDirectory()))
+            .reduce(0, Integer::sum);
   }
 
   /**
@@ -49,21 +49,20 @@ public class DocFileUtils {
   public static Optional<DocDataFile> searchForByte(DocFile root, byte someByte) {
     if (root.isDataFile()) {
       return root.asDataFile().containsByte(someByte)
-          ? Optional.of(root.asDataFile()) :
-          Optional.empty();
+          ? Optional.of(root.asDataFile())
+          : Optional.empty();
     } else {
-      List<DocDataFile> files = root.asDirectory()
-          .getAllFiles()
-          .stream()
-          .map(f -> searchForByte(f, someByte))
-          .filter(Optional::isPresent)
-          .map(Optional::get).toList();
+      List<DocDataFile> files =
+          root.asDirectory().getAllFiles().stream()
+              .map(f -> searchForByte(f, someByte))
+              .filter(Optional::isPresent)
+              .map(Optional::get)
+              .toList();
       if (files.size() == 0) {
         return Optional.empty();
       } else {
         return Optional.of(files.get(0));
       }
     }
-
   }
 }

@@ -1,8 +1,6 @@
 package filesystems;
 
 import java.util.Arrays;
-import java.util.Objects;
-import javax.print.Doc;
 
 public final class DocDataFile extends DocFile {
   private final byte[] contents;
